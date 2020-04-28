@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+    <head><title>Text Differenciator</title></head>
+
+    <body>
+        <div id="container">
+            <div id="heading">Text Differenciator</div>
+
+            <textarea id="text1" style="width:494px;height:354px;resize:none;"></textarea>
+
+            <textarea id="text2" style="width:494px;height:354px;resize:none;"></textarea>
+
+            <div id="name1">Text 1</div>
+
+            <div id="name2">Text 2</div>
+
+            <input id="runbutton" type="button" value="Go" onclick="Run()">
+
+            <div id="output">Check difference</div>
+        </div>
+    </body>
+</html>
+
+<style>
+    body {
+        background-color: black;
+    }
+
+    #container {
+        position: relative;
+        width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #heading {
+        position: absolute;
+        width: 1000px;
+        background-color: white;
+        height: 40px;
+        font-size: 34px;
+        text-align: center;
+    }
+
+    #text1 {
+        position: absolute;
+        top: 70px;
+    }
+
+    #text2 {
+        position: absolute;
+        top: 70px;
+        left: 500px;
+    }
+
+    #name1 {
+        position: absolute;
+        top: 40px;
+        width:500px;
+        height:30px;
+        font-size:25px;
+        background-color: white;
+        text-align: center;
+    }
+
+    #name2 {
+        position: absolute;
+        top: 40px;
+        left: 500px;
+        width:500px;
+        height:30px;
+        font-size:25px;
+        background-color: white;
+        text-align: center;
+    }
+
+    #runbutton {
+        position: absolute;
+        width: 1000px;
+        height:30px;
+        font-size: 25px;
+        top: 430px;
+    }
+
+    #output {
+        position:absolute;
+        width: 1000px;
+        height: 40px;
+        font-size: 30px;
+        top: 460px;
+        background-color: white;
+    }
+</style>
+
+<script>
+    var text1 = document.getElementById("text1");
+    var text2 = document.getElementById("text2");
+    var output = document.getElementById("output");
+    var points;
+    function Run(){
+        points = 0;
+        var totalpoints = ((text1.value.length - 8)*1)+((text1.value.length - 9)*1.5)+((text1.value.length - 10)*2)+((text1.value.length - 11)*2.5)+((text1.value.length - 12)*3)+((text1.value.length - 13)*3.5)+((text1.value.length - 14)*4)+((text1.value.length - 15)*4.5);
+        totalpoints = totalpoints / 2.5;
+        for(i=0;i<(text1.value.length - 8);i++){
+            if(text2.value.search(text1.value.slice(i,i+8)) >= 0){
+                points++;
+            }
+        }
+
+        for(i=0;i<(text1.value.length - 9);i++){
+            if(text2.value.search(text1.value.slice(i,i+9)) >= 0){
+                points = points + 1.5;
+            }
+        }
+
+        for(i=0;i<(text1.value.length - 10);i++){
+            if(text2.value.search(text1.value.slice(i,i+10)) >= 0){
+                points = points + 2;
+            }
+        }
+
+        for(i=0;i<(text1.value.length - 11);i++){
+            if(text2.value.search(text1.value.slice(i,i+11)) >= 0){
+                points = points + 2.5;
+            }
+        }
+
+        for(i=0;i<(text1.value.length - 12);i++){
+            if(text2.value.search(text1.value.slice(i,i+12)) >= 0){
+                points = points + 3;
+            }
+        }
+
+        for(i=0;i<(text1.value.length - 13);i++){
+            if(text2.value.search(text1.value.slice(i,i+13)) >= 0){
+                points = points + 3.5;
+            }
+        }
+
+        for(i=0;i<(text1.value.length - 14);i++){
+            if(text2.value.search(text1.value.slice(i,i+14)) >= 0){
+                points = points + 4;
+            }
+        }
+
+        for(i=0;i<(text1.value.length - 15);i++){
+            if(text2.value.search(text1.value.slice(i,i+15)) >= 0){
+                points = points + 4.5;
+            }
+        }
+        var percentage = (points/totalpoints)*100;
+        if(percentage<5){
+            output.style.backgroundColor = "Green";
+            output.innerHTML = "The texts are nowhere near similar.";
+        }
+        if(percentage>5 && percentage<15){
+            output.style.backgroundColor = "Lime";
+            output.innerHTML = "The texts have few similarities.";
+        }
+        if(percentage>15 && percentage<35){
+            output.style.backgroundColor = "Turquoise";
+            output.innerHTML = "The texts are somewhat similar";
+        }
+        if(percentage>35 && percentage<55){
+            output.style.backgroundColor = "Yellow";
+            output.innerHTML = "The texts have quite a few similarities.";
+        }
+        if(percentage>55 && percentage<75){
+            output.style.backgroundColor = "Orange";
+            output.innerHTML = "The texts have a lot of similarities.";
+        }
+        if(percentage>75 && percentage<90){
+            output.style.backgroundColor = "Magenta";
+            output.innerHTML = "The texts are very similar.";
+        }
+        if(percentage>90){
+            output.style.backgroundColor = "Red";
+            output.innerHTML = "The texts are practically identical.";
+        }
+    }
+</script>
